@@ -22,7 +22,7 @@ class MenuState extends FlxUIState
 {
 	var loop_music:Bool = false;
 	var music_volume:Float = 0.5;
-	#if !flash
+	#if FLX_PITCH
 	var music_pitch:Float = 1.0;
 	#end
 	var sfx_volume:Float = 0.5;
@@ -42,7 +42,7 @@ class MenuState extends FlxUIState
 		var butt_pause:FlxUIButton = cast _ui.getAsset("butt_pause");
 		enablePause(false);
 
-		#if flash
+		#if FLX_NO_PITCH
 		_ui.removeAsset("music_pitch");
 		_ui.removeAsset("music_pitch_label");
 		#end
@@ -80,7 +80,7 @@ class MenuState extends FlxUIState
 			{
 				sfx_volume = nums.value;
 			}
-			#if !flash
+			#if FLX_PITCH
 			else if (wname == "music_pitch")
 			{
 				music_pitch = nums.value;
@@ -89,7 +89,7 @@ class MenuState extends FlxUIState
 			if (FlxG.sound.music != null && FlxG.sound.music.exists)
 			{
 				FlxG.sound.music.volume = music_volume;
-				#if !flash
+				#if FLX_PITCH
 				FlxG.sound.music.pitch = music_pitch;
 				#end
 			}
@@ -141,7 +141,7 @@ class MenuState extends FlxUIState
 					{
 						fuib.toggled = true;
 						FlxG.sound.playMusic(sound_id, music_volume, loop_music);
-						#if !flash
+						#if FLX_PITCH
 						FlxG.sound.music.pitch = music_pitch;
 						#end
 						FlxG.sound.music.onComplete = musicComplete;
